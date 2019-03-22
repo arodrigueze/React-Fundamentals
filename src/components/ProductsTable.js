@@ -83,7 +83,7 @@ class ProductsTable extends Component {
 
     return (
       _.toLower(product.name).indexOf(_.toLower(filterText)) === -1 ||
-      inStockOnly && !product.stocked
+      (inStockOnly && !product.stocked)
     )
   }
 

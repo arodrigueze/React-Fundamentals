@@ -24,7 +24,7 @@ export const fetchProducts = (dispatch) => {
   .then(products => {
     setTimeout(() => {
       dispatch(addProducts(products))
-    }, 2000)
+    }, 200)
   })
   .catch(error => dispatch(productsFailed(error.message)));
 }

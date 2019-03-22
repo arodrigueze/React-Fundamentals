@@ -4,11 +4,10 @@ import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import Modal from '@material-ui/core/Modal';
 import ProductsTable from './ProductsTable'
+import AddProductModal from './AddProductModal'
 import SearchBar from './SearchBar'
 import Typography from '@material-ui/core/Typography';
-import _ from 'lodash'
 import { connect } from 'react-redux'
 import logo from '../logo.svg';
 import { openAddProductModal } from '../redux/ActionCreators'
@@ -26,12 +25,14 @@ const styles = {
 };
 
 const mapDispatchToProps = { openAddProductModal }
+
 class FilterableProductTable extends Component {
   constructor(props) {
     super(props);
     this.state = {
       filterText: '',
-      inStockOnly: false
+      inStockOnly: false,
+      isToggleOn: false
     };
 
     // Example to show bind options
@@ -40,7 +41,7 @@ class FilterableProductTable extends Component {
   }
 
   render() {
-    const { classes, dispatch } = this.props;
+    const { classes } = this.props;
 
     return (
       <React.Fragment>
@@ -61,9 +62,10 @@ class FilterableProductTable extends Component {
             <ProductsTable {...this.getProductsTableProps()} />
           </CardContent>
           <CardActions>
-            <Button size="small" onClick={() => dispatch(openAddProductModal)}>ADD PRODUCT</Button>
+            <Button size="small" onClick={this.props.openAddProductModal}>ADD PRODUCT</Button>
           </CardActions>
         </Card>
+        <AddProductModal></AddProductModal>
       </React.Fragment>
     )
   }

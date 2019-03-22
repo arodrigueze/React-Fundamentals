@@ -1,10 +1,13 @@
 import * as ActionTypes from './ActionTypes'
-const DEFAULT_STATE = { isLoading: true, errMess: null, products:[], selectedProducts: []}
+const DEFAULT_STATE = { isLoading: true, errMess: null, products:[], selectedProducts: [], openModalAddProduct: false}
 
 export const products = (state = DEFAULT_STATE, action) => {
   switch (action.type) {
       case ActionTypes.ADD_PRODUCTS:
         return {...state, isLoading: false, errMess: null, products: action.payload}
+      
+      case ActionTypes.OPEN_MODAL_ADD_PRODUCT:
+        return {...state, openModalAddProduct: !state.openModalAddProduct}
 
       case ActionTypes.ADD_PRODUCT:
         return {
@@ -22,6 +25,7 @@ export const products = (state = DEFAULT_STATE, action) => {
         return { ...state, selectedProducts: [...state.selectedProducts, action.product] }
 
       case ActionTypes.UNSELECT_PRODUCT:
+      
         return {
           ...state,
           selectedProducts: [...state.selectedProducts.filter(p => p !== action.product)]
